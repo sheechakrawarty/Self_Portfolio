@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certifications - Shikha Chakrawarty</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    :root {
+        --primary-color: #5C8374;
+        --secondary-color: #93B1A6;
+        --dark-color: #183D3D;
+        --light-color: #f5f5f5;
+        --text-color: #333;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
+
+    body {
+        background-image: url('background.avif');
+        background-size: cover;
+        background-attachment: fixed;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    header {
+        background-color: var(--primary-color);
+        padding: 20px 0;
+        text-align: center;
+        border-radius: 0 0 20px 20px;
+        box-shadow: var(--shadow);
+        animation: fadeInDown 1s ease;
+    }
+
+    header h1 {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 600;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar {
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: fadeIn 1.5s ease;
+    }
+
+    .navbar a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        font-size: 1.4rem;
+        padding: 10px 20px;
+        border-radius: 30px;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+        color: var(--primary-color);
+        background: rgba(255, 255, 255, 0.8);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar a.active {
+        color: var(--primary-color);
+        background: rgba(255, 255, 255, 0.8);
+        font-weight: bold;
+    }
+
+    .navbar a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary-color);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    .navbar a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .certifications-section {
+        padding: 60px 0;
+        text-align: center;
+        animation: fadeInUp 1s ease;
+    }
+
+    .certifications-section h2 {
+        font-size: 2.5rem;
+        color: var(--dark-color);
+        margin-bottom: 40px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .certification-card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(147, 177, 166, 0.2));
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+
+    .certification-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .certification-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(24, 61, 61, 0.9);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 1;
+    }
+
+    .certification-card:hover::before {
+        opacity: 1;
+    }
+
+    .certification-front {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        transition: opacity 0.5s ease;
+    }
+
+    .certification-card:hover .certification-front {
+        opacity: 0;
+    }
+
+    .certification-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+
+    .certification-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+    }
+
+    .certification-issuer {
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    .certification-date {
+        font-size: 1rem;
+        color: #666;
+    }
+
+    .certification-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 2;
+        padding: 20px;
+    }
+
+    .certification-card:hover .certification-back {
+        opacity: 1;
+    }
+
+    .certificate-image {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .view-certificate {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 3;
+    }
+
+    .certification-card:hover .view-certificate {
+        opacity: 1;
+    }
+
+    footer {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: var(--secondary-color);
+        padding: 30px 0;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .footer-text {
+        font-size: 1.1rem;
+        max-width: 600px;
+        text-align: left;
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 15px;
+    }
+
+    .footer-social a {
+        color: var(--secondary-color);
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+        color: var(--primary-color);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 992px) {
+        header h1 {
+            font-size: 2rem;
+        }
+        
+        .navbar a {
+            font-size: 1.2rem;
+            padding: 8px 16px;
+        }
+        
+        .certifications-section h2 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .certifications-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .navbar {
+            gap: 10px;
+        }
+        
+        .navbar a {
+            font-size: 1rem;
+            padding: 6px 12px;
+        }
+        
+        .certification-card {
+            height: 250px;
+            padding: 20px;
+        }
+        
+        .footer-content {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 576px) {
+        header h1 {
+            font-size: 1.7rem;
+        }
+        
+        .navbar {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .navbar a {
+            width: 80%;
+            text-align: center;
+        }
+        
+        .certifications-section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .certification-name {
+            font-size: 1.3rem;
+        }
+    }
+</style>
+<body>
+    <header>
+        <div class="container">
+            <h1>Shikha Chakrawarty</h1>
+        </div>
+    </header>
+    
+    <nav class="navbar container">
+        <a href="Education.html">Education</a>
+        <a href="Certification.html" class="active">Certifications</a>
+        <a href="Intro.html">About ME</a>
+        <a href="project.html">Projects</a>
+    </nav>
+    
+    <section class="certifications-section container">
+        <h2>My Certifications</h2>
+        
+        <div class="certifications-grid">
+            <!-- Certification 1 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="certification-name">Java Development</h3>
+                    <p class="certification-issuer">JP Morgan</p>
+                    <p class="certification-date">Completed: Sept 2025</p>
+                </div>
+                <div class="certification-back">
+                    <img src="JPMorgan.png" alt="Full Stack Certificate" class="certificate-image">
+                </div>
+               
+            </div>
+            
+            <!-- Certification 2 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="certification-name">C Programming</h3>
+                    <p class="certification-issuer">Cisco</p>
+                    <p class="certification-date">Completed: April 2023</p>
+                </div>
+                <div class="certification-back">
+                    <img src="network.jpg" alt="SQL Certificate" class="certificate-image">
+                </div>
+                
+            </div>
+            
+            <!-- Certification 3 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="certification-name">UI/Ux Design</h3>
+                    <p class="certification-issuer">Great Learning</p>
+                    <p class="certification-date">Completed: March 2023</p>
+                </div>
+                <div class="certification-back">
+                    <img src="UI_UX.jpg" alt="Python Certificate" class="certificate-image">
+                </div>
+            </div>
+            
+            <!-- Certification 4 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="certification-name">AWS Cloud Practitioner</h3>
+                    <p class="certification-issuer">Amazon Web Services</p>
+                    <p class="certification-date">Completed: Aug 2024</p>
+                </div>
+                <div class="certification-back">
+                    <img src="aws.png" alt="AWS Certificate" class="certificate-image">
+                </div>
+            </div>
+            
+            <!-- Certification 5 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="certification-name">Ai Fundamentals</h3>
+                    <p class="certification-issuer">IBM</p>
+                    <p class="certification-date">Completed: January 2023</p>
+                </div>
+                <div class="certification-back">
+                    <img src="ibm.jpg" alt="Android Certificate" class="certificate-image">
+                </div>
+            </div>
+            
+            <!-- Certification 6 -->
+            <div class="certification-card">
+                <div class="certification-front">
+                    <div class="certification-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="certification-name">digital Marketing</h3>
+                    <p class="certification-issuer">Google</p>
+                    <p class="certification-date">Completed: December 2022</p>
+                </div>
+                <div class="certification-back">
+                    <img src="dm.jpg" alt="Cybersecurity Certificate" class="certificate-image">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p>Continuously learning and expanding my skillset through certifications and practical experience.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://leetcode.com/u/ch_shikha/" target="_blank"><i class="fab fa-google"></i></a>
+                    <a href="https://github.com/sheechakrawarty" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/shikha-chakrawarty-985a0a226/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.certification-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            elements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
